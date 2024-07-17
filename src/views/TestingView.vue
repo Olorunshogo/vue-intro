@@ -1,5 +1,5 @@
 <script setup>
-    import { ref } from 'vue'
+    import { ref, reactive, computed } from 'vue'
 
     const count = ref(0)
     const refCount = ref(5)
@@ -9,6 +9,20 @@
         refCount.value+=num
         otherCount.value+=num
     }
+    const author = reactive({
+        name: 'John Doe',
+        books: [
+            // 'Vue 2 - Advanced Guide',
+            // 'Vue 3 - Basic Guide',
+            // 'Vue 4 - The Mystery'
+        ]
+    })
+
+    // A computed ref
+    const publishedBooksMessage = computed(() => {
+        return author.books.length > 0 ? 'Yes, ' + 'the author has published ' + author.books.length + ' books.' :
+         'No. The author has published ' + author.books.length + ' books.'
+    })
 
 
 </script>
@@ -23,6 +37,10 @@
             <p>{{ refCount }}</p>
             <p>{{ otherCount }}</p>
             <button class="btn" v-on:click="refIncrement(+5)">Count</button>
+        </div>
+        <div class="row">
+            <p>Has this author published any book?</p>
+            <p><span>{{ publishedBooksMessage}}</span></p>
         </div>   
     </div>
 </template>
