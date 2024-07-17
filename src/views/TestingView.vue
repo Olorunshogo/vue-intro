@@ -48,10 +48,17 @@
             <p>Has this author published any book?</p>
             <p><span>{{ publishedBooksMessage}}</span></p>
         </div>  
-        <div class="row">
+        <div class="row" title="Class and Style Bindings">
             <div v-bind:style="styleObject"></div>
             <div :style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }"></div>
         </div> 
+        <div class="row" title="Conditional Rendering">
+            <!-- <button class="btn" @click="awesome">Toggle V-If</button>
+            <h2 v-if="awesome">Vue is awesome!</h2>
+            <h2 v-else>Oh no &#128546;</h2> -->
+
+            <h2 v-show="ok">Hello!</h2>
+        </div>
     </div>
 </template>
 
