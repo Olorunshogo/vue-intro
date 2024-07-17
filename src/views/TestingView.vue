@@ -1,6 +1,7 @@
 <script setup>
     import { ref, reactive, computed } from 'vue'
 
+    // Reactivity Fundamentals
     const count = ref(0)
     const refCount = ref(5)
     const otherCount = ref(10)
@@ -9,6 +10,7 @@
         refCount.value+=num
         otherCount.value+=num
     }
+    // Computed Properties
     const author = reactive({
         name: 'John Doe',
         books: [
@@ -17,18 +19,52 @@
             // 'Vue 4 - The Mystery'
         ]
     })
-
     // A computed ref
     const publishedBooksMessage = computed(() => {
         return author.books.length > 0 ? 'Yes, ' + 'the author has published ' + author.books.length + ' books.' :
          'No. The author has published ' + author.books.length + ' books.'
     })
 
-    // Class and Style Binding
-    const styleObject = reactive({
-        color: 'red',
-        fontSize: '30px'
+    // List Rendering
+    const parentMessage = ref('Full Name: ')
+    const items = ref([
+        { message: 'John Babtunde Doe'}, 
+        { message: 'Doe Babatunde John' }
+    ])
+    const myObject = reactive({
+        title: 'How to do lists in Vue',
+        author: 'John Doe',
+        publishedAt: '20-07-2024'
     })
+
+    // Mutation Methods
+    const mutationMethods = ref([
+        { method: 'push()' },
+        { method: 'pop()' },
+        { method: 'shift()' },
+        { method: 'unshift()' },
+        { method: 'splice()' },
+        { method: 'sort()' },
+        { method: 'reverse()' }
+    ])
+    // Non Mutation Methods
+    const nonMutationMethods = ref([
+        { method: 'filter()' },
+        { method: 'concat()' },
+        { method: 'slice()' }
+    ])
+    // Replacing an Array
+    const numbers = ref([1, 2, 3, 4, 5])
+    const evenNumbers = computed(() => {
+        return numbers.value.filter((n) => n % 2 === 0)
+    })
+    const sets = ref([
+        [1, 2, 3, 4, 5],
+        [6, 7, 8, 9, 10]
+    ])
+    function even(numbers) {
+        return numbers.filter((number) => number % 2 === 0 )
+    }
 
 
 </script>
@@ -48,16 +84,57 @@
             <p>Has this author published any book?</p>
             <p><span>{{ publishedBooksMessage}}</span></p>
         </div>  
-        <div class="row" title="Class and Style Bindings">
-            <div v-bind:style="styleObject"></div>
-            <div :style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }"></div>
-        </div> 
         <div class="row" title="Conditional Rendering">
             <!-- <button class="btn" @click="awesome">Toggle V-If</button>
             <h2 v-if="awesome">Vue is awesome!</h2>
             <h2 v-else>Oh no &#128546;</h2> -->
 
-            <h2 v-show="ok">Hello!</h2>
+            <!-- <h2 v-show="ok">Hello!</h2> -->
+        </div>
+        <div class="row" title="List Rendering">
+            <h3>List 1</h3>
+            <li v-for="(item, index) in items">
+                {{ parentMessage }} {{ item.message }} - {{ index }} 
+            </li>
+            <h3>List 2</h3>
+            <li v-for="{ message } in items">
+                {{ message }}
+            </li>
+            <h3>List 2 with Index Alias</h3>
+            <li v-for="({ message }, index) in items">
+                {{ message }} {{ index }}
+            </li>
+            <h2>v-for with an Object</h2>
+            <ul>
+                <span v-for="(value, key, index) in myObject">
+                    {{ index + 1 }}. {{ key }}: {{ value }}
+                </span>
+            </ul>
+            <h3>Mutation Methods</h3>
+            <ul>
+                <li v-for="({ method }, index) in mutationMethods">
+                    {{ method }}
+                </li>
+            </ul>
+            <h3>Non Mutation Methods</h3>
+            <ul>
+                <li v-for="({ method }, index) in nonMutationMethods">
+                    {{ method }}
+                </li>
+            </ul>
+            <ul v-for="numbers in sets">
+                <li v-for="n in even(numbers)">
+                    {{ n }}
+                </li>
+            </ul>
+            <h3>Even Number</h3>
+            <ul>
+                <li v-for="n in evenNumbers">
+                    {{ n }}
+                </li>
+            </ul>
+            
+            
         </div>
     </div>
 </template>
