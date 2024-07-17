@@ -24,24 +24,34 @@
          'No. The author has published ' + author.books.length + ' books.'
     })
 
+    // Class and Style Binding
+    const styleObject = reactive({
+        color: 'red',
+        fontSize: '30px'
+    })
+
 
 </script>
 
 <template>
     <div class="container">
-        <header class="header">
+        <header class="header" title="Header">
             <h1>TESTING VIEW</h1>
         </header>
-        <div class="row">
+        <div class="row" title="Reactivity Fundamentals">
             <p>Count is: + {{ count + 18 }}</p>
             <p>{{ refCount }}</p>
             <p>{{ otherCount }}</p>
             <button class="btn" v-on:click="refIncrement(+5)">Count</button>
         </div>
-        <div class="row">
+        <div class="row" title="Computed Properties">
             <p>Has this author published any book?</p>
             <p><span>{{ publishedBooksMessage}}</span></p>
-        </div>   
+        </div>  
+        <div class="row">
+            <div v-bind:style="styleObject"></div>
+            <div :style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }"></div>
+        </div> 
     </div>
 </template>
 
