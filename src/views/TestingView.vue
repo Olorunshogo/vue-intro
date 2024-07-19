@@ -1,41 +1,5 @@
-<script setup>
-    import { ref, reactive, computed } from 'vue'
-
-    // Reactivity Fundamentals
-    const count = ref(0)
-    const refCount = ref(5)
-    const otherCount = ref(10)
-    function refIncrement(num) {
-        count.value++
-        refCount.value+=num
-        otherCount.value+=num
-    }
-    // Computed Properties
-    const author = reactive({
-        name: 'John Doe',
-        books: [
-            // 'Vue 2 - Advanced Guide',
-            // 'Vue 3 - Basic Guide',
-            // 'Vue 4 - The Mystery'
-        ]
-    })
-    // A computed ref
-    const publishedBooksMessage = computed(() => {
-        return author.books.length > 0 ? 'Yes, ' + 'the author has published ' + author.books.length + ' books.' :
-         'No. The author has published ' + author.books.length + ' books.'
-    })
-
-    // List Rendering
-    const parentMessage = ref('Full Name: ')
-    const items = ref([
-        { message: 'John Babtunde Doe'}, 
-        { message: 'Doe Babatunde John' }
-    ])
-    const myObject = reactive({
-        title: 'How to do lists in Vue',
-        author: 'John Doe',
-        publishedAt: '20-07-2024'
-    })
+<script>
+    import { ref } from 'vue'
 
     // Mutation Methods
     const mutationMethods = ref([
@@ -53,28 +17,17 @@
         { method: 'concat()' },
         { method: 'slice()' }
     ])
-    // Replacing an Array
-    const numbers = ref([1, 2, 3, 4, 5])
-    const evenNumbers = computed(() => {
-        return numbers.value.filter((n) => n % 2 === 0)
-    })
-    const sets = ref([
-        [1, 2, 3, 4, 5],
-        [6, 7, 8, 9, 10]
-    ])
-    function even(numbers) {
-        return numbers.filter((number) => number % 2 === 0 )
-    }
+
 
     // EVENT LISTENING: Method Handlers
     const name = ref('Vue.js')
     function greet(event) {
         alert(`Hello ${name.value}!`)
-        // if (event) {
-        //     alert(event.target.tagName + '!!!')
-        // }
-        
+        if (event) {
+            alert(event.target.tagName + '!!!')
+        }        
     }
+
     const message = ref('Form cannot be submitted yet.')
     function warn(message, event) {
         if (event) {
@@ -91,76 +44,23 @@
         <header class="header" title="Header">
             <h1>TESTING VIEW</h1>
         </header>
-        <div class="row" title="Reactivity Fundamentals">
-            <h2>Reactivity Fundamentals</h2>
-            <p>Count is: + {{ count + 18 }}</p>
-            <p>{{ refCount }}</p>
-            <p>{{ otherCount }}</p>
-            <button class="btn" v-on:click="refIncrement(+5)">Count</button>
-        </div>
-        <div class="row" title="Computed Properties">
-            <h2>Computed Properties</h2>
-            <p>Has this author published any book?</p>
-            <p><span>{{ publishedBooksMessage}}</span></p>
-        </div>  
-        <div class="row" title="Conditional Rendering">
-            <h2>Conditional Rendering</h2>
-            <!-- <button class="btn" @click="awesome">Toggle V-If</button>
-            <h2 v-if="awesome">Vue is awesome!</h2>
-            <h2 v-else>Oh no &#128546;</h2> -->
 
-            <!-- <h2 v-show="ok">Hello!</h2> -->
-        </div>
         <div class="row" title="List Rendering">
             <h3>List Rendering</h3>
 
-            <h4>List 1</h4>
-            <li v-for="(item, index) in items">
-                {{ parentMessage }} {{ item.message }} - {{ index }} 
-            </li>
-
-            <h4>List 2</h4>
-            <li v-for="{ message } in items">
-                {{ message }}
-            </li>
-
-            <h4>List 2 with Index Alias</h4>
-            <li v-for="({ message }, index) in items">
-                {{ message }} {{ index }}
-            </li>
-
-            <h3>V-for with an Object</h3>
-            <ul>
-                <span v-for="(value, key, index) in myObject">
-                    {{ index + 1 }}. {{ key }}: {{ value }}
-                </span>
-            </ul>
-
             <h4>Mutation Methods</h4>
             <ul>
-                <li v-for="({ method }, index) in mutationMethods">
-                    {{ method }}
+                <li v-for="({ method }, index) in mutationMethods" v-bind:key="method">
+                    {{ index }}. {{ method }}
                 </li>
             </ul>
 
             <h4>Non Mutation Methods</h4>
             <ul>
-                <li v-for="({ method }, index) in nonMutationMethods">
-                    {{ method }}
+                <li v-for="({ method }, index) in nonMutationMethods" v-bind:key="method">
+                    {{ index }}. {{ method }}
                 </li>
-            </ul>
-            <ul v-for="numbers in sets">
-                <li v-for="n in even(numbers)">
-                    {{ n }}
-                </li>
-            </ul>
-
-            <h4>Even Number</h4>
-            <ul>
-                <li v-for="n in evenNumbers">
-                    {{ n }}
-                </li>
-            </ul>            
+            </ul>           
         </div>
 
         <div class="row" title="Event Handling">
@@ -197,27 +97,33 @@
             <!-- i.e. not from a child element -->
             <div @click.self="doThat">...</div>
         </div>
+        
 
         <div class="row" title="Form Input Bindings">
             <h2>Form Input Bindings</h2>
+
+            <p>Message is: {{ textMsg }}</p>
+            <input type="text" v-model="textMsg" placeholder="edit me" />
+
+            <p>Multiline msg is:</p>
+            <p>{{ textareaMsg }}</p>
+            <textarea v-model="textareaMsg" placeholder="add multiple lines"></textarea>
+
+
         </div>
 
         
     </div>
-
 </template>
 
 <style scoped>
     .container {
-        display: flex;
-        flex-direction: column;
-        flex: 0 0 100%;
-        max-width: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
     }
 
     header h1 {
-        display: flex;
-        justify-content: center;
+        text-align: center;
         color: cadetblue;
     }
 
@@ -245,5 +151,30 @@
     }
     .btn:active {
         transform: scale(0.95);
+    }
+
+    input[type=text],
+    textarea {
+        border: 1px solid #555;
+        font-family: inherit;
+        outline: none;
+        background-color: var(--color-background);
+        color: #ddd;
+        padding: 1rem 0.5rem;
+        height: 35px;
+        width: 200px;
+        border-radius: 6px;
+        transition: all 0.5s ease-in-out;
+    }
+    input[type=text]:focus,
+    textarea:focus {
+        border: 1px solid blue;
+        background-color: #111;
+    }
+    input[type=text]::placeholder,
+    textarea::placeholder {
+        font-weight: 600;
+        font-size: 0.8rem;
+        padding-bottom: 50px;
     }
 </style>
