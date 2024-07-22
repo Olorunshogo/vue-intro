@@ -1,5 +1,7 @@
 <script setup>
     // import { ref, onMounted } from 'vue'
+    import { ref } from 'vue'
+    import CounterComp from '../components/CounterComp.vue'
 
     // EVENT LISTENING: Method Handlers
     // const vueName = ref('Vue.js')
@@ -45,6 +47,8 @@
     //     { text: 'Three', value: 'C' }
     // ])
     // const selectedNumber = ref()
+
+    const count = ref(0)
 </script>
 
 <template>
@@ -188,8 +192,12 @@
             <p>Each Vue component instance goes through a series of initialization steps when it's created - for example, it needs to set up data observation, compile the template, mount the instance to the DOM, and update the DOM when data changes. Along the way, it also runs functions called lifecycle hooks, giving users the opportunity to add their own code at specific stages.</p> -->
         </div>
 
-        <div class="row" title="Template Refs">
-            
+        <div class="row" title="Component Basics">
+            <h3>Component Basics</h3>
+            <b>Here is a child component!</b>
+            <CounterComp />
+
+            <button class="btn" @click="count++">You clicked me <span><b>{{ count }}</b></span> times.</button>
         </div>
         
 
