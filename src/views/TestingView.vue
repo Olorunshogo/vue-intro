@@ -1,40 +1,47 @@
-<script>
+<script setup>
     import { ref } from 'vue'
 
-    // Mutation Methods
-    const mutationMethods = ref([
-        { method: 'push()' },
-        { method: 'pop()' },
-        { method: 'shift()' },
-        { method: 'unshift()' },
-        { method: 'splice()' },
-        { method: 'sort()' },
-        { method: 'reverse()' }
-    ])
-    // Non Mutation Methods
-    const nonMutationMethods = ref([
-        { method: 'filter()' },
-        { method: 'concat()' },
-        { method: 'slice()' }
-    ])
-
-
     // EVENT LISTENING: Method Handlers
-    const name = ref('Vue.js')
-    function greet(event) {
-        alert(`Hello ${name.value}!`)
-        if (event) {
-            alert(event.target.tagName + '!!!')
-        }        
-    }
+    // const vueName = ref('Vue.js')
+    // function greet(event) {
+    //     alert(`Hello ${vueName.value}!`)
+    //     if (event) {
+    //         alert(event.target.tagName + '!!!')
+    //     }        
+    // }
 
-    const message = ref('Form cannot be submitted yet.')
-    function warn(message, event) {
-        if (event) {
-            event.preventDefault();
-        }
-        alert(message)
-    }
+    // const msg = ref('Form cannot be submitted yet.')
+    // function warn(msg, event) {
+    //     if (event) {
+    //         event.preventDefault();
+    //     }
+    //     alert(msg)
+    // }
+
+    const textMsg = ref("") 
+    const lazyTextMsg = ref("") 
+    
+    const age = ref()
+
+    const textareaMsg = ref('')
+
+    const checked = ref('False')
+    const toggleYesNo = ref('No')
+    const toggleDynamicTrueFalse = ref("")
+    const checkedNames = ref([])
+
+    const picked = ref([])
+
+    const selected = ref("")
+    const selectedMultiple = ref([])
+    const selectedTable = ref("A")
+    // const option = ref("")
+    const options = ref([
+        { text: 'One', value: 'A' },
+        { text: 'Two', value: 'B' },
+        { text: 'Three', value: 'C' }
+    ])
+    const selectedNumber = ref()
 
 
 </script>
@@ -45,69 +52,133 @@
             <h1>TESTING VIEW</h1>
         </header>
 
-        <div class="row" title="List Rendering">
-            <h3>List Rendering</h3>
-
-            <h4>Mutation Methods</h4>
-            <ul>
-                <li v-for="({ method }, index) in mutationMethods" v-bind:key="method">
-                    {{ index }}. {{ method }}
-                </li>
-            </ul>
-
-            <h4>Non Mutation Methods</h4>
-            <ul>
-                <li v-for="({ method }, index) in nonMutationMethods" v-bind:key="method">
-                    {{ index }}. {{ method }}
-                </li>
-            </ul>           
-        </div>
-
         <div class="row" title="Event Handling">
-            <h2>Event Handling</h2>
+            <!-- <h2>Event Handling</h2> -->
 
             <!-- `greet` is the Name of the method defined above -->
-            <button class="btn" v-on:click="greet">Greet</button>
+            <!-- <button class="btn" v-on:click="greet">Greet</button> -->
 
             <!-- Using $event special variable -->
-            <button class="btn" v-on:click="warn(message, $event)">
-                Submit
-            </button>
-
-            <!-- Using inline arrow function -->
-            <button class="btn" @click="(event) => warn(message, event)">
-                Submit
-            </button>
-
-            <h3>Event Modifiers</h3>
-
-            <!-- The click evyent's propagation will be stopped. -->
-            <a @click.stop="doThis"></a>
-
-            <!-- The default submit evyent will no longer reload the page. -->
-            <form @submit.prevent="onSubmit"></form>
-
-            <!-- modifiers can be chained -->
-            <a @click.stop.prevent="doThat"></a>
-
-            <!-- just the modifier -->
-            <form @submit.prevent></form>
-
-            <!-- only trigger handler if evyent.target is the element itself -->
-            <!-- i.e. not from a child element -->
-            <div @click.self="doThat">...</div>
+            <!-- <button class="btn" v-on:click="warn(msg, $event)">
+                $event special variable Submit
+            </button> -->
         </div>
         
 
         <div class="row" title="Form Input Bindings">
             <h2>Form Input Bindings</h2>
 
-            <p>Message is: {{ textMsg }}</p>
-            <input type="text" v-model="textMsg" placeholder="edit me" />
+            <div title="Text Input Fields">
+                <div><h3>Text</h3>
+                    <p>Message is: {{ textMsg }}</p>
+                    <input type="text" v-model="textMsg" name="inputText" placeholder="Input text here..." />
+                </div>
+                <div><h3>Text</h3>
+                    <!-- Sync after change instead of input -->
+                    <p>The lazy text message is: {{ lazyTextMsg }}</p>
+                    <input type="text" v-model.lazy="lazyTextMsg" name="inputText" placeholder="Input text here..." />
+                </div>
+            </div>
 
-            <p>Multiline msg is:</p>
-            <p>{{ textareaMsg }}</p>
-            <textarea v-model="textareaMsg" placeholder="add multiple lines"></textarea>
+            <div>
+                <input type="number" id="age" v-model.number="age" />
+            </div>
+
+            <div title="Textarea input Fields">
+                <h3>Textarea</h3>
+                <p>Message is: <span style="white-space: pre-line;">{{ textareaMsg }}</span></p>
+                <textarea v-model="textareaMsg" name="inputTextarea" placeholder="Add multiple lines messages here..."></textarea>
+            </div>
+           
+            <div class="checkbox" title="Checkboxes">
+            <h3>Checkbox</h3>
+                <div title="True or False">
+                    <!-- TRUE or False -->
+                    <label for="checkbox">{{ checked }}</label>
+                    <input type="checkbox" name="checkbox" id="checkbox" v-model="checked" />
+                </div>
+                
+                <div title="Checked Names">
+                    <!-- Array containing names when chcked -->
+                    <div>Checked names: {{ checkedNames }}</div>
+                    <input type="checkbox" id="jack" value="Jack" v-model="checkedNames" />
+                    <label for="jack">Jack</label>
+
+                    <input type="checkbox" id="john" value="John" v-model="checkedNames" />
+                    <label for="john">John</label>
+
+                    <input type="checkbox" id="mike" value="Mike" v-model="checkedNames" />
+                    <label for="mike">Mike</label>
+                </div>
+
+                <div title="Yes or No">
+                    <label for="trueFalseCheckbox">Toggle</label>
+                    <input type="checkbox" id="trueFalseCheckbox"
+                        v-model="toggleYesNo" true-value="Yes" false-value="No"
+                    >
+                    &NonBreakingSpace;<span>{{ toggleYesNo }} </span>
+                </div>
+
+                <div title="Dynamic Yes or Dynamic No">
+                    <label for="trueFalseCheckbox">Toggle2</label>
+                    <input type="checkbox"
+                        v-model="toggleDynamicTrueFalse"
+                        true-value="dynamicTrueValue" false-value="dynamicFalseValue"
+                    >
+                    &NonBreakingSpace;<span>{{ toggleDynamicTrueFalse }} </span>
+                </div>
+                
+                
+            </div>
+
+            <div class="radio" title="Radio Input Field">
+                <h3>Radio</h3>
+                <div>
+                    <!-- Picking numbers -->
+                    <div>Picked: {{ picked }}</div>
+
+                    <input type="radio" id="one" value="One" v-model="picked" />
+                    <label for="one">One</label>
+                    <input type="radio" id="two" value="Two" v-model="picked" />
+                    <label for="two">Two</label>
+                </div>
+            </div>
+
+            <div class="select" title="Selections">
+                <h3>Select</h3>
+                <div>
+                    <p>Selected: {{ selected }}</p>
+
+                    <select v-model="selected">
+                        <option disabled value="">Please Select one</option>
+                        <option>A</option>
+                        <option>B</option>
+                        <option>C</option>
+                    </select>
+                </div>
+                <div title="Multiple">
+                    <p>SelectedMultple: {{ selectedMultiple }}</p>
+                    <select v-model="selectedMultiple" multiple id="selectedMultiple">
+                        <option disabled value="">You may select more than one option</option>
+                        <option>A</option>
+                        <option>B</option>
+                        <option>C</option>
+                    </select>
+                </div>
+                <div>
+                    <select v-model="selectedTable">
+                        <option v-for="option in options" :value="option.value" :key="option">
+                            {{ option.text }}
+                        </option>
+                    </select>
+                </div>
+                <div>
+                    <select v-model="selectedNumber">
+                        <!-- inline object literal -->
+                        <option :value="{ number: 123 }">123</option>
+                    </select>
+                </div>
+            </div>
 
 
         </div>
@@ -120,6 +191,7 @@
     .container {
         display: grid;
         grid-template-columns: 1fr;
+        padding-bottom: 6rem;
     }
 
     header h1 {
@@ -133,6 +205,7 @@
         flex: 0 0 100%;
         max-width: 100%;
         flex-wrap: wrap;
+        padding: 1rem 0.5rem;
     }
 
     .row h2 {
@@ -144,6 +217,7 @@
         outline: none;
         width: 150px;
         height: 40px;
+        margin: 8px 0;
         text-align: center;
         border-radius: 22px 8px;
         background-color: var(--vt-c-black-mute);
@@ -153,8 +227,7 @@
         transform: scale(0.95);
     }
 
-    input[type=text],
-    textarea {
+    input[type=text] {
         border: 1px solid #555;
         font-family: inherit;
         outline: none;
@@ -162,19 +235,74 @@
         color: #ddd;
         padding: 1rem 0.5rem;
         height: 35px;
-        width: 200px;
+        width: 70%;
+        margin: 8px 0;
         border-radius: 6px;
         transition: all 0.5s ease-in-out;
     }
+
+    textarea {
+        box-sizing: border-box;
+        width: 70%;
+        height: 100px;
+        padding: 12px 20px;
+        border: 1px solid #555;
+        outline: none;
+        border-radius: 4px;
+        font-family: inherit;
+        background-color: var(--color-background);
+        color: #ddd;
+        resize: both;       
+        margin: 8px 0;
+        transition: all 0.2s ease-out;
+    }
+
     input[type=text]:focus,
     textarea:focus {
         border: 1px solid blue;
         background-color: #111;
     }
+
     input[type=text]::placeholder,
     textarea::placeholder {
         font-weight: 600;
         font-size: 0.8rem;
         padding-bottom: 50px;
+    }
+
+    .checkbox input[type=checkbox],
+    input[type=radio] {
+        height: 16px;
+        width: 16px;
+        margin: 4px 0;
+        transition: all 0.5s ease-in-out;
+    }
+
+    .checkbox label,
+    .radio label {
+        font-weight: 600;
+        padding: 4px 20px 4px;
+    }
+
+    .select > div {
+        margin: 1rem 0;
+    }
+
+    .select select {
+        width: 70%;
+        height: 40px;
+        padding: 0.6rem 1.2rem;
+        border: 1px solid #555;
+        border-radius: 4px;
+        background-color: var(--color-background);
+        transition: all 0.3s ease-out;
+    }
+
+    .select #selectedMultiple {
+        height: 120px;
+    }
+
+    .select option {
+        padding: 8px 0;
     }
 </style>
