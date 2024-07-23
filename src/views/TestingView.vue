@@ -1,7 +1,5 @@
 <script setup>
     // import { ref, onMounted } from 'vue'
-    import { ref } from 'vue'
-    import CounterComp from '../components/CounterComp.vue'
 
     // EVENT LISTENING: Method Handlers
     // const vueName = ref('Vue.js')
@@ -48,7 +46,22 @@
     // ])
     // const selectedNumber = ref()
 
-    const count = ref(0)
+    // COMPONENTS
+    // import { ref } from 'vue'
+    // import CounterComp from '../components/CounterComp.vue'
+    // import BlogPost from '../components/BlogPost.vue'
+    import AlertBox from '../components/AlertBox.vue'
+
+    // const posts = ref([
+    //     { index: 1, id: 'textareaOne', title: "My journey with Vue" },
+    //     { index: 2, id: 'textareaTwo', title: "Blogging with Vue" },
+    //     { index: 3, id: 'textareaThree', title: "Why Vue is so much fun" }
+    // ])
+    // const postFontSize = ref(1)
+    
+
+    
+
 </script>
 
 <template>
@@ -57,147 +70,166 @@
             <h1>TESTING VIEW</h1>
         </header>
 
-        <div class="row" title="Event Handling">
-            <!-- <h2>Event Handling</h2> -->
+       <div>
+            <div class="row" title="Event Handling">
+                <!-- <h2>Event Handling</h2> -->
 
-            <!-- `greet` is the Name of the method defined above -->
-            <!-- <button class="btn" v-on:click="greet">Greet</button> -->
+                <!-- `greet` is the Name of the method defined above -->
+                <!-- <button class="btn" v-on:click="greet">Greet</button> -->
 
-            <!-- Using $event special variable -->
-            <!-- <button class="btn" v-on:click="warn(msg, $event)">
-                $event special variable Submit
-            </button> -->
-        </div>
+                <!-- Using $event special variable -->
+                <!-- <button class="btn" v-on:click="warn(msg, $event)">
+                    $event special variable Submit
+                </button> -->
+            </div>
         
 
-        <div class="row" title="Form Input Bindings">
-            <!-- <h2>Form Input Bindings</h2> -->
+            <div class="row" title="Form Input Bindings">
+                <!-- <h2>Form Input Bindings</h2> -->
 
-            <div title="Text Input Fields">
-                <!-- <div><h3>Text</h3>
-                    <p>Message is: {{ textMsg }}</p>
-                    <input type="text" v-model="textMsg"
-                        name="inputText" placeholder="Input text here..."
-                        ref="textMsg"
-                    />
-                </div> -->
-                <div>
-                    <!-- <h3>Text</h3> -->
-                    <!-- Sync after change instead of input -->
-                    <!-- <p>The lazy text message is: {{ lazyTextMsg }}</p>
-                    <input type="text" v-model.lazy="lazyTextMsg" name="inputText" placeholder="Input text here..." /> -->
+                <div title="Text Input Fields">
+                    <!-- <div><h3>Text</h3>
+                        <p>Message is: {{ textMsg }}</p>
+                        <input type="text" v-model="textMsg"
+                            name="inputText" placeholder="Input text here..."
+                            ref="textMsg"
+                        />
+                    </div> -->
+                    <div>
+                        <!-- <h3>Text</h3> -->
+                        <!-- Sync after change instead of input -->
+                        <!-- <p>The lazy text message is: {{ lazyTextMsg }}</p>
+                        <input type="text" v-model.lazy="lazyTextMsg" name="inputText" placeholder="Input text here..." /> -->
+                    </div>
                 </div>
+
+                <!-- <div title="Number">
+                    <p>Age is: {{ age }}</p>
+                    <input type="number" id="age" v-model.number="age" placeholer="Input your age here..." />
+                </div>
+
+                <div title="Textarea input Fields">
+                    <h3>Textarea</h3>
+                    <p>Message is: <span style="white-space: pre-line;">{{ textareaMsg }}</span></p>
+                    <textarea v-model="textareaMsg" name="inputTextarea" placeholder="Add multiple lines messages here..."></textarea>
+                </div> -->
+            
+                <div class="checkbox" title="Checkboxes">
+                    <!-- <h3>Checkbox</h3>
+                    <div>
+                        <label for="checkbox">{{ checked }}</label>
+                        <input type="checkbox" name="checkbox" id="checkbox" v-model="checked" />
+                    </div> -->
+                    
+                    <div title="Checked Names">
+                        <!-- Array containing names when chcked -->
+                        <!-- <div>Checked names: {{ checkedNames }}</div>
+                        <input type="checkbox" id="jack" value="Jack" v-model="checkedNames" />
+                        <label for="jack">Jack</label>
+
+                        <input type="checkbox" id="john" value="John" v-model="checkedNames" />
+                        <label for="john">John</label>
+
+                        <input type="checkbox" id="mike" value="Mike" v-model="checkedNames" />
+                        <label for="mike">Mike</label> -->
+                    </div>
+
+                    <!-- <div title="Yes or No">
+                        <label for="trueFalseCheckbox">Toggle</label>
+                        <input type="checkbox" id="trueFalseCheckbox"
+                            v-model="toggleYesNo" true-value="Yes" false-value="No"
+                        >
+                        &NonBreakingSpace;<span>{{ toggleYesNo }} </span>
+                    </div>
+
+                    <div title="Dynamic Yes or Dynamic No">
+                        <label for="trueFalseCheckbox">Toggle2</label>
+                        <input type="checkbox"
+                            v-model="toggleDynamicTrueFalse"
+                            true-value="dynamicTrueValue" false-value="dynamicFalseValue"
+                        >
+                        &NonBreakingSpace;<span>{{ toggleDynamicTrueFalse }} </span>
+                    </div>                   -->
+                </div>
+
+                <!-- <div class="radio" title="Radio Input Field">
+                    <h3>Radio</h3>
+                    <div>
+                        <div>Picked: {{ picked }}</div>
+
+                        <input type="radio" id="one" value="One" v-model="picked" />
+                        <label for="one">One</label>
+                        <input type="radio" id="two" value="Two" v-model="picked" />
+                        <label for="two">Two</label>
+                    </div>
+                </div> -->
+
+                <div class="select" title="Selections">
+                    <!-- <h3>Select</h3>
+                    <div>
+                        <p>Selected: {{ selected }}</p>
+
+                        <select v-model="selected">
+                            <option disabled value="">Please Select one</option>
+                            <option>A</option>
+                            <option>B</option>
+                            <option>C</option>
+                        </select>
+                    </div>
+                    <div title="Multiple">
+                        <p>SelectedMultple: {{ selectedMultiple }}</p>
+                        <select v-model="selectedMultiple" multiple id="selectedMultiple">
+                            <option disabled value="">You may select more than one option</option>
+                            <option>A</option>
+                            <option>B</option>
+                            <option>C</option>
+                        </select>
+                    </div>
+                    <div>
+                        <select v-model="selectedTable">
+                            <option v-for="option in options" :value="option.value" :key="option">
+                                {{ option.text }}
+                            </option>
+                        </select>
+                    </div>
+                    <div>  -->
+                        <!-- inline object literal -->
+                        <!-- <select v-model="selectedNumber">
+                            <option :value="{ number: 123 }">123</option>
+                        </select>
+                    </div> -->
+                </div> 
             </div>
 
-            <!-- <div title="Number">
-                <p>Age is: {{ age }}</p>
-                <input type="number" id="age" v-model.number="age" placeholer="Input your age here..." />
+            <div class="row" title="Lifecycle Hooks">
+                <!-- <h2>Lifecycle Hooks</h2>
+                <p>Each Vue component instance goes through a series of initialization steps when it's created - for example, it needs to set up data observation, compile the template, mount the instance to the DOM, and update the DOM when data changes. Along the way, it also runs functions called lifecycle hooks, giving users the opportunity to add their own code at specific stages.</p> -->
             </div>
-
-            <div title="Textarea input Fields">
-                <h3>Textarea</h3>
-                <p>Message is: <span style="white-space: pre-line;">{{ textareaMsg }}</span></p>
-                <textarea v-model="textareaMsg" name="inputTextarea" placeholder="Add multiple lines messages here..."></textarea>
-            </div> -->
-           
-            <div class="checkbox" title="Checkboxes">
-                <!-- <h3>Checkbox</h3>
-                <div>
-                    <label for="checkbox">{{ checked }}</label>
-                    <input type="checkbox" name="checkbox" id="checkbox" v-model="checked" />
-                </div> -->
-                
-                <div title="Checked Names">
-                    <!-- Array containing names when chcked -->
-                    <!-- <div>Checked names: {{ checkedNames }}</div>
-                    <input type="checkbox" id="jack" value="Jack" v-model="checkedNames" />
-                    <label for="jack">Jack</label>
-
-                    <input type="checkbox" id="john" value="John" v-model="checkedNames" />
-                    <label for="john">John</label>
-
-                    <input type="checkbox" id="mike" value="Mike" v-model="checkedNames" />
-                    <label for="mike">Mike</label> -->
-                </div>
-
-                <!-- <div title="Yes or No">
-                    <label for="trueFalseCheckbox">Toggle</label>
-                    <input type="checkbox" id="trueFalseCheckbox"
-                        v-model="toggleYesNo" true-value="Yes" false-value="No"
-                    >
-                    &NonBreakingSpace;<span>{{ toggleYesNo }} </span>
-                </div>
-
-                <div title="Dynamic Yes or Dynamic No">
-                    <label for="trueFalseCheckbox">Toggle2</label>
-                    <input type="checkbox"
-                        v-model="toggleDynamicTrueFalse"
-                        true-value="dynamicTrueValue" false-value="dynamicFalseValue"
-                    >
-                    &NonBreakingSpace;<span>{{ toggleDynamicTrueFalse }} </span>
-                </div>                   -->
-            </div>
-
-            <!-- <div class="radio" title="Radio Input Field">
-                <h3>Radio</h3>
-                <div>
-                    <div>Picked: {{ picked }}</div>
-
-                    <input type="radio" id="one" value="One" v-model="picked" />
-                    <label for="one">One</label>
-                    <input type="radio" id="two" value="Two" v-model="picked" />
-                    <label for="two">Two</label>
-                </div>
-            </div> -->
-
-            <div class="select" title="Selections">
-                <!-- <h3>Select</h3>
-                <div>
-                    <p>Selected: {{ selected }}</p>
-
-                    <select v-model="selected">
-                        <option disabled value="">Please Select one</option>
-                        <option>A</option>
-                        <option>B</option>
-                        <option>C</option>
-                    </select>
-                </div>
-                <div title="Multiple">
-                    <p>SelectedMultple: {{ selectedMultiple }}</p>
-                    <select v-model="selectedMultiple" multiple id="selectedMultiple">
-                        <option disabled value="">You may select more than one option</option>
-                        <option>A</option>
-                        <option>B</option>
-                        <option>C</option>
-                    </select>
-                </div>
-                <div>
-                    <select v-model="selectedTable">
-                        <option v-for="option in options" :value="option.value" :key="option">
-                            {{ option.text }}
-                        </option>
-                    </select>
-                </div>
-                <div>  -->
-                    <!-- inline object literal -->
-                    <!-- <select v-model="selectedNumber">
-                        <option :value="{ number: 123 }">123</option>
-                    </select>
-                </div> -->
-            </div> 
-        </div>
-
-        <div class="row" title="Lifecycle Hooks">
-            <!-- <h2>Lifecycle Hooks</h2>
-            <p>Each Vue component instance goes through a series of initialization steps when it's created - for example, it needs to set up data observation, compile the template, mount the instance to the DOM, and update the DOM when data changes. Along the way, it also runs functions called lifecycle hooks, giving users the opportunity to add their own code at specific stages.</p> -->
-        </div>
+       </div>
 
         <div class="row" title="Component Basics">
             <h3>Component Basics</h3>
-            <b>Here is a child component!</b>
-            <CounterComp />
+            <!-- === COUNTER COMPONENT === -->
+            <!-- <div>
+                <b>Here is a child component!</b>
 
-            <button class="btn" @click="count++">You clicked me <span><b>{{ count }}</b></span> times.</button>
+                <CounterComp title="The First Counter Component" />
+                <CounterComp title="The Second Counter Component" />  
+            </div>     -->
+            <!-- === BLOGPOST COMPONENT === -->
+            <!-- <div v-bind:style="{ fontSize: postFontSize + 'em' }">
+                <BlogPost
+                    v-for="post in posts"
+                    v-bind:key="post.index"
+                    v-bind:title="post.title"
+                    v-bind:index="post.index"
+                    @enlarge-text="postFontSize += 0.1"
+                />
+            </div>    -->
+            <!-- === ALERTBOX COMPONENT === -->
+            <div>
+                <AlertBox />
+            </div>
         </div>
         
 
