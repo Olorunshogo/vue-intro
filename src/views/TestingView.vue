@@ -47,18 +47,19 @@
     // const selectedNumber = ref()
 
     // COMPONENTS
-    // import { ref } from 'vue'
+    import { ref } from 'vue'
     // import CounterComp from '../components/CounterComp.vue'
-    // import BlogPost from '../components/BlogPost.vue'
+    import BlogPost from '../components/BlogPost.vue'
     import AlertBox from '../components/AlertBox.vue'
 
-    // const posts = ref([
-    //     { index: 1, id: 'textareaOne', title: "My journey with Vue" },
-    //     { index: 2, id: 'textareaTwo', title: "Blogging with Vue" },
-    //     { index: 3, id: 'textareaThree', title: "Why Vue is so much fun" }
-    // ])
-    // const postFontSize = ref(1)
-    
+    const posts = ref([
+        { index: 1, id: 'textareaOne', title: "My journey with Vue", greetingMessage: "1. Hello Vue!!!" },
+        { index: 2, id: 'textareaTwo', title: "Blogging with Vue", greetingMessage: "2. Hello Vue!!!" },
+        { index: 3, id: 'textareaThree', title: "Why Vue is so much fun", greetingMessage: "3. Hello Vue!!!" }
+    ])
+    const postFontSize = ref(1)
+
+    // import AdCount from '../components/AdCount.vue' 
 
     
 
@@ -217,19 +218,24 @@
                 <CounterComp title="The Second Counter Component" />  
             </div>     -->
             <!-- === BLOGPOST COMPONENT === -->
-            <!-- <div v-bind:style="{ fontSize: postFontSize + 'em' }">
-                <BlogPost
+            <div v-bind:style="{ fontSize: postFontSize + 'em' }">
+                <BlogPost 
                     v-for="post in posts"
                     v-bind:key="post.index"
                     v-bind:title="post.title"
                     v-bind:index="post.index"
+                    v-bind:greetingMessage="post.greetingMessage"
                     @enlarge-text="postFontSize += 0.1"
                 />
-            </div>    -->
+            </div>   
             <!-- === ALERTBOX COMPONENT === -->
             <div>
                 <AlertBox />
             </div>
+            <!-- <div>
+                <AdCount :initial-value="0" increment="5" decrement="2"/>
+                <AdCount :initial-value="4" increment="4" decrement="1"/>
+            </div> -->
         </div>
         
 

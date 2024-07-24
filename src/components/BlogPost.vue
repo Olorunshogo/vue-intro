@@ -1,8 +1,73 @@
 <script setup>
-    const props = defineProps(['title', 'index', 'id'])
+    const props = defineProps({
+        title: String,
+        id: Number,
+        index: Number,
+        greetingMessage: String
+    })
 
     const emit = defineEmits(['enlarge-text'])
     emit('enlarge-text')
+
+    // PROPS TYPES
+    // defineProps({
+
+    //     Basic type check
+    //      (`null` and `undefined` values will allow any type)
+    //     propA: Number,
+
+    //     // Multiple possible types
+    //     propB: [String, Number],
+
+    //     // Required string
+    //     propC: {
+    //         type: String,
+    //         required: true
+    //     },
+
+    //     // Required but nullable string
+    //     propD: {
+    //         type: [String, null],
+    //         required: true
+    //     },
+
+    //     // Number with a default value
+    //     propE: {
+    //         type: Number,
+    //         default: 100
+    //     },
+
+    //     // Object with a default value
+    //     propF: {
+    //         type: Object,
+    //         // Object or array defaults must be returned from
+    //         // a factory function. The function receives the raw
+    //         // props received by the component as the argument.
+    //         default(rawProps) {
+    //         return { message: 'hello' }
+    //         }
+    //     },
+
+    //     // Custom validator function
+    //     // full props passed as 2nd argument in 3.4+
+    //     propG: {
+    //         validator(value, props) {
+    //         // The value must match one of these strings
+    //         return ['success', 'warning', 'danger'].includes(value)
+    //         }
+    //     },
+
+    //     // Function with a default value
+    //     propH: {
+    //         type: Function,
+    //         // Unlike object or array default, this is not a factory
+    //         // function - this is a function to serve as a default value
+    //         default() {
+    //         return 'Default function'
+    //         }
+    //     }
+    // })
+
 </script>
 
 <template>
@@ -11,6 +76,7 @@
             <h4>{{ props.index }}. {{ props.title }}</h4>
         </header>
         <main class="blog-post">
+            <p>{{ props.greetingMessage }}</p>
             <div class="textareaContainer">
                 <textarea></textarea>
             </div>
