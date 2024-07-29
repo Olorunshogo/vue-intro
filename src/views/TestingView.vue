@@ -1,5 +1,5 @@
 <script setup>
-    import { ref } from 'vue'
+    // import { ref } from 'vue'
 
     // import InputFields from '../components/InputFields.vue'
 
@@ -10,18 +10,14 @@
     // import BlogPost from '../components/BlogPost.vue'
     // import AdCount from '../components/AdCount.vue' 
     import AlertBox from '../components/AlertBox.vue'
-    // import Slot from '../components/Slots.vue'
+    import SlotApp from '../components/SlotApp.vue'
 
     // const posts = ref([
     //     { index: 1, id: 'textareaOne', title: "My journey with Vue", greetingMessage: "1. Hello Vue!!!" },
     //     { index: 2, id: 'textareaTwo', title: "Blogging with Vue", greetingMessage: "2. Hello Vue!!!" },
     //     { index: 3, id: 'textareaThree', title: "Why Vue is so much fun", greetingMessage: "3. Hello Vue!!!" }
     // ])
-    // const postFontSize = ref(1)
-
-    
-
-    
+    // const postFontSize = ref(1) 
 
 </script>
 
@@ -31,16 +27,20 @@
             <h1>TESTING VIEW</h1>
         </header>
 
+        <!-- === ALERTBOX COMPONENT === -->
+        <div class="row" title="Alert Box">
+            <AlertBox />
+        </div>
+
         <div class="row" title="Component Basics">
-            <h3>Component Basics</h3>
+            <!-- <h3>Component Basics</h3> -->
 
             <!-- === COUNTER COMPONENT === -->
             <!-- <div>
-                <b>Here is a child component!</b>
-
                 <CounterComp title="The First Counter Component" />
                 <CounterComp title="The Second Counter Component" />  
             </div>     -->
+
             <!-- === BLOGPOST COMPONENT === -->
             <!-- <div v-bind:style="{ fontSize: postFontSize + 'em' }">
                 <BlogPost 
@@ -52,10 +52,7 @@
                     @enlarge-text="postFontSize += 0.1"
                 />
             </div>    -->
-            <!-- === ALERTBOX COMPONENT === -->
-            <div>
-                <AlertBox />
-            </div>
+            
             <!-- <div>
                 <AdCount :initial-value="0" increment="5" decrement="2"/>
                 <AdCount :initial-value="4" increment="4" decrement="1"/>
@@ -67,6 +64,10 @@
                 <InputFields  />
             </div>
         </div> -->
+
+        <div title="Slots">
+            <SlotApp></SlotApp>
+        </div>
         
 
         

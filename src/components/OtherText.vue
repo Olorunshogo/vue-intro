@@ -59,6 +59,7 @@ defineOptions({
         background-color: var(--vt-c-black-mute);
         box-shadow: 2px 2px 1px 1px var(--vt-c-black), -2px -2px 1px 1px var(--vt-c-black);
     }
+    
     .btn:active {
         transform: scale(0.95);
     }
