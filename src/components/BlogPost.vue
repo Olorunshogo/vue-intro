@@ -6,8 +6,26 @@
         greetingMessage: String
     })
 
-    const emit = defineEmits(['enlarge-text'])
-    emit('enlarge-text')
+    // defineEmits(['enlargeText', 'inFocus'])
+    // const emit = defineEmits({
+    //     // No validation
+    //     click: null,
+
+    //     // Validate submit event
+    //     submit: ({ email, password }) => {
+    //         if (email && password) {
+    //             return true
+    //         } else {
+    //             console.warn('Invalid submit event payload!')
+    //             return false
+    //         }
+    //     }
+    // })
+
+    // function submitForm(email, password) {
+    //     emit('submit', { email, password })
+    // }
+    
 
     // PROPS TYPES
     // defineProps({
@@ -82,7 +100,7 @@
             </div>
             <div class="btnWrapper">
                 <button class="btn">Send</button>
-                <button class="btn" v-on:click="$emit('enlarge-text')">
+                <button class="btn" v-on:click="$emit('enlargeText')">
                     Enlarge text
                 </button>
             </div>

@@ -1,22 +1,5 @@
 <script setup>
-    // import { ref, onMounted } from 'vue'
-
-    // EVENT LISTENING: Method Handlers
-    // const vueName = ref('Vue.js')
-    // function greet(event) {
-    //     alert(`Hello ${vueName.value}!`)
-    //     if (event) {
-    //         alert(event.target.tagName + '!!!')
-    //     }        
-    // }
-
-    // const msg = ref('Form cannot be submitted yet.')
-    // function warn(msg, event) {
-    //     if (event) {
-    //         event.preventDefault();
-    //     }
-    //     alert(msg)
-    // }
+    import { ref } from 'vue'
 
     // FORM INPUT BINDINGS
     // const textMsg = ref("") 
@@ -47,7 +30,6 @@
     // const selectedNumber = ref()
 
     // COMPONENTS
-    import { ref } from 'vue'
     // import CounterComp from '../components/CounterComp.vue'
     import BlogPost from '../components/BlogPost.vue'
     import AlertBox from '../components/AlertBox.vue'
@@ -221,7 +203,7 @@
             <div v-bind:style="{ fontSize: postFontSize + 'em' }">
                 <BlogPost 
                     v-for="post in posts"
-                    v-bind:key="post.index"
+                    v-bind:key="post"
                     v-bind:title="post.title"
                     v-bind:index="post.index"
                     v-bind:greetingMessage="post.greetingMessage"
